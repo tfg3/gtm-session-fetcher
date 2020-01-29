@@ -1108,6 +1108,10 @@ NSString *const kGTMSessionFetcherUploadLocationObtainedNotification =
 - (void)sendQueryForUploadOffsetWithFetcherProperties:(NSDictionary *)props {
   GTMSessionFetcher *queryFetcher = [self uploadFetcherWithProperties:props
                                                          isQueryFetch:YES];
+#if !GTM_DISABLE_FETCHER_TEST_BLOCK
+  queryFetcher.testBlock = self.testBlock;
+#endif // GTM_DISABLE_FETCHER_TEST_BLOCK
+  
   queryFetcher.bodyData = [NSData data];
 
   NSString *originalComment = self.comment;
